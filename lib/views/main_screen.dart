@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_practice/views/like_screen_view_model.dart';
 import 'package:getx_practice/views/main_screen_view_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -10,7 +11,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  //Dependency Injection
   final mainScreenController = Get.put(MainScreenViewModel());
+  final likeScreenController = Get.put(LikeScreenViewModel());
 
   @override
   void initState() {
@@ -56,12 +59,28 @@ class _MainScreenState extends State<MainScreen> {
                                       'https://picsum.photos/id/421/200/200',
                                 ))),
                         Positioned(
-                            right: -10,
-                            bottom: -10,
-                            child: CupertinoButton(
-                              onPressed: () {},
-                              child: Icon(CupertinoIcons.heart),
-                            ))
+                          right: -10,
+                          bottom: -10,
+                          child: controller.newsList[index].bookMark!
+                              ? CupertinoButton(
+                                  onPressed: () {
+                                    likeScreenController
+                                        .deleteLike(controller.newsList[index]);
+                                    controller.changeMarking(index);
+                                    setState(() {});
+                                  },
+                                  child: Icon(CupertinoIcons.heart_fill),
+                                )
+                              : CupertinoButton(
+                                  onPressed: () {
+                                    likeScreenController
+                                        .addLike(controller.newsList[index]);
+                                    controller.changeMarking(index);
+                                    setState(() {});
+                                  },
+                                  child: Icon(CupertinoIcons.heart),
+                                ),
+                        )
                       ]),
                     );
                   },

@@ -22,4 +22,8 @@ class MainScreenViewModel extends GetxController {
       _newsList.assignAll(value.articles);
     });
   }
+
+  void changeMarking(int index) {
+    _newsList[index].bookMark = !_newsList[index].bookMark!;
+  }
 }

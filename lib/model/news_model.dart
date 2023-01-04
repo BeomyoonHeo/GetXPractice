@@ -22,6 +22,7 @@ class News {
   String? urlToImage;
   String? description;
   String? publishedAt;
+  bool? bookMark;
 
   News(
       {this.title,
@@ -35,6 +36,7 @@ class News {
         !(urlToImage!.startsWith('http') || urlToImage!.startsWith('https'))) {
       urlToImage = 'https://picsum.photos/id/421/200/200';
     }
+    bookMark = false;
   }
 
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
