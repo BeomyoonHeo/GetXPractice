@@ -20,10 +20,14 @@ News _$NewsFromJson(Map<String, dynamic> json) => News(
       title: json['title'] as String?,
       author: json['author'] as String?,
       content: json['content'] as String?,
+      urlToImage: json['urlToImage'] as String?,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$NewsToJson(News instance) => <String, dynamic>{
       'title': instance.title,
       'author': instance.author,
       'content': instance.content,
+      'urlToImage': instance.urlToImage,
+      'description': instance.description,
     };
