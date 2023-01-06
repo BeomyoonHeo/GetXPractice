@@ -5,7 +5,7 @@ import 'package:getx_practice/views/like_screen_view_model.dart';
 import 'package:getx_practice/views/main_screen_view_model.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -26,17 +26,17 @@ class _MainScreenState extends State<MainScreen> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('News'),
+        middle: const Text('News'),
         trailing: CupertinoButton(
           // IconButton은 Material전용이므로 CupertinoButton 사용
-          child: Icon(CupertinoIcons.heart),
+          child: const Icon(CupertinoIcons.heart),
           onPressed: () {},
         ),
       ),
       child: GetX<MainScreenViewModel>(
         builder: (controller) => Scaffold(
           body: controller.newsList.isEmpty
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis),
                       trailing: Stack(children: [
-                        Container(
+                        SizedBox(
                             height: 100,
                             child: AspectRatio(
                                 aspectRatio: 1.5,
@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                                     controller.changeMarking(index);
                                     setState(() {});
                                   },
-                                  child: Icon(CupertinoIcons.heart_fill),
+                                  child: const Icon(CupertinoIcons.heart_fill),
                                 )
                               : CupertinoButton(
                                   onPressed: () {
@@ -78,14 +78,14 @@ class _MainScreenState extends State<MainScreen> {
                                     controller.changeMarking(index);
                                     setState(() {});
                                   },
-                                  child: Icon(CupertinoIcons.heart),
+                                  child: const Icon(CupertinoIcons.heart),
                                 ),
                         )
                       ]),
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return Divider(
+                    return const Divider(
                       thickness: 1,
                     );
                   },
