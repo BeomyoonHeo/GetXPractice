@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_practice/views/detail_news_screen.dart';
 import 'package:getx_practice/views/favorite_screen_view_model.dart';
 import 'package:getx_practice/views/news_view_model.dart';
 
@@ -25,6 +26,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return GetX<FavoriteScreenViewModel>(
       builder: (controller) => CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
+          leading: CupertinoButton(
+              padding: EdgeInsets.zero,
+              child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [Icon(CupertinoIcons.back), Text('news')]),
+              onPressed: () => Navigator.pop(context)),
           middle: const Text('Favorites'),
           trailing: TextButton(
               child: const Text('Delete All'),
@@ -59,6 +67,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               : ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(
+                      onTap: () => Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) =>
+                              DetailNewsScreen(newsIndex: index),
+                        ),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
                       title: Text(controller.newsList[index].title!,

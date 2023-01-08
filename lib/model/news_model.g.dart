@@ -22,6 +22,10 @@ News _$NewsFromJson(Map<String, dynamic> json) => News(
       content: json['content'] as String?,
       urlToImage: json['urlToImage'] as String?,
       description: json['description'] as String?,
+      publishedAt: json['publishedAt'] == null
+          ? null
+          : DateTime.parse(json['publishedAt'] as String),
+      bookMark: json['bookMark'] as bool?,
     );
 
 Map<String, dynamic> _$NewsToJson(News instance) => <String, dynamic>{
@@ -30,4 +34,6 @@ Map<String, dynamic> _$NewsToJson(News instance) => <String, dynamic>{
       'content': instance.content,
       'urlToImage': instance.urlToImage,
       'description': instance.description,
+      'publishedAt': instance.publishedAt?.toIso8601String(),
+      'bookMark': instance.bookMark,
     };
