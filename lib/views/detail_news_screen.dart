@@ -81,7 +81,7 @@ class DetailNewsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Text('${news.description}'),
+              Text(news.description ?? '기사 내용이 없습니다.'),
             ]),
           ),
         ),
