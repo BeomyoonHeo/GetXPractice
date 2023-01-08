@@ -21,24 +21,25 @@ class News {
   String? content;
   String? urlToImage;
   String? description;
-  String? publishedAt;
+  DateTime? publishedAt;
   bool? bookMark;
 
-  News(
-      {this.title,
-      this.author,
-      this.content,
-      this.urlToImage,
-      this.description,
-      this.publishedAt}) {
+  News({
+    this.title,
+    this.author,
+    this.content,
+    this.urlToImage,
+    this.description,
+    this.publishedAt,
+    this.bookMark,
+  }) {
     // url 이미지 깨졌을때 대체 이미지
-    if (urlToImage != null &&
+    if (urlToImage == null ||
         !(urlToImage!.startsWith('http') || urlToImage!.startsWith('https'))) {
       urlToImage = 'https://picsum.photos/id/421/200/200';
     }
     bookMark = false;
   }
-
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewsToJson(this);

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:getx_practice/views/favorite_screen.dart';
 import 'package:getx_practice/views/main_screen.dart';
