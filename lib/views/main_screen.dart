@@ -24,7 +24,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     //Cupertino는 아이폰 전용 UI를 가지고 있기 때문에 Cupertino 사용 - 피그마 UI따라가기
-
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: const Text('News'),
@@ -63,12 +62,10 @@ class _MainScreenState extends State<MainScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            height: 200,
-                            width: 100,
-                            fit: BoxFit.cover,
-                            controller.newsList[index].urlToImage ??
-                                'https://picsum.photos/id/421/200/200',
-                          ),
+                              height: 200,
+                              width: 100,
+                              fit: BoxFit.cover,
+                              controller.newsList[index].urlToImage!),
                         ),
                         Positioned(
                           right: -10,

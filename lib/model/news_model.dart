@@ -40,7 +40,6 @@ class News {
     }
     bookMark = false;
   }
-
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewsToJson(this);
