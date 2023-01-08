@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:getx_practice/view/mainscreen.dart';
+import 'package:getx_practice/views/favorite_screen.dart';
+import 'package:getx_practice/views/main_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,9 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: const CupertinoThemeData(brightness: Brightness.light),
       home: const MainScreen(),
+      routes: {
+        'MainScreen': (context) => const MainScreen(),
+        'FavoriteScreen': (context) => const FavoriteScreen(),
+      },
     );
   }
 }
