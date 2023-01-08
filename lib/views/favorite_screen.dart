@@ -4,16 +4,16 @@ import 'package:get/get.dart';
 import 'package:getx_practice/views/favorite_screen_view_model.dart';
 import 'package:getx_practice/views/news_view_model.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({Key? key}) : super(key: key);
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {
   //Dependency Injection
-  final mainScreenController = Get.put(MainScreenViewModel());
   final favoriteScreenController = Get.put(FavoriteScreenViewModel());
+  final mainScreenController = Get.put(MainScreenViewModel());
 
   @override
   void initState() {
@@ -22,26 +22,43 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //Cupertino는 아이폰 전용 UI를 가지고 있기 때문에 Cupertino 사용 - 피그마 UI따라가기
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: const Text('News'),
-        trailing: CupertinoButton(
-          // IconButton은 Material전용이므로 CupertinoButton 사용
-          child: const Icon(CupertinoIcons.heart),
-          onPressed: () {
-            Navigator.pushNamed(context, 'FavoriteScreen');
-          },
+    return GetX<FavoriteScreenViewModel>(
+      builder: (controller) => CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: const Text('Favorites'),
+          trailing: TextButton(
+              child: const Text('Delete All'),
+              onPressed: () {
+                showCupertinoDialog(
+                  context: context,
+                  builder: (context) => CupertinoAlertDialog(
+                    title: const Text('Delete Everything'),
+                    actions: [
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
+                        child: const Text('Cancel'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
+                        child: const Text('Confirm'),
+                        onPressed: () {
+                          controller.deleteAllLike();
+                          mainScreenController.deleteAllBookMark();
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              }),
         ),
-      ),
-      child: GetX<MainScreenViewModel>(
-        builder: (controller) => Scaffold(
+        child: Scaffold(
           body: controller.newsList.isEmpty
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(child: Text('Favorites is Empty'))
               : ListView.separated(
                   itemBuilder: (context, index) {
                     return ListTile(
-                      onTap: () {},
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 20),
                       title: Text(controller.newsList[index].title!,
@@ -68,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
                                   onPressed: () {
                                     favoriteScreenController
                                         .deleteLike(controller.newsList[index]);
-                                    controller.changeMarking(index);
+                                    mainScreenController.changeMarking(index);
                                   },
                                   child: const Icon(CupertinoIcons.heart_fill),
                                 )
@@ -76,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                                   onPressed: () {
                                     favoriteScreenController
                                         .addLike(controller.newsList[index]);
-                                    controller.changeMarking(index);
+                                    mainScreenController.changeMarking(index);
                                   },
                                   child: const Icon(CupertinoIcons.heart),
                                 ),

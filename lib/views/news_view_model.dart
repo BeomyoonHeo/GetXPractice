@@ -17,6 +17,10 @@ class MainScreenViewModel extends GetxController {
     super.onInit();
   }
 
+  News getNews(int page) {
+    return _newsList[page];
+  }
+
   void init() async {
     await news.getNews().then((value) {
       _newsList.assignAll(value.articles);
@@ -25,5 +29,12 @@ class MainScreenViewModel extends GetxController {
 
   void changeMarking(int index) {
     _newsList[index].bookMark = !_newsList[index].bookMark!;
+    //refresh 를 통하여 해당 viewModel 을 watch 하고 있는 위젯을 Rebuild 한다.
+    _newsList.refresh();
+  }
+
+  void deleteAllBookMark() {
+    _newsList.map((news) => news.bookMark = false).toList();
+    _newsList.refresh();
   }
 }

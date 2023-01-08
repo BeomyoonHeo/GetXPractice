@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:getx_practice/views/favorite_screen.dart';
 import 'package:getx_practice/views/main_screen.dart';
 
 void main() {
@@ -22,9 +23,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: const CupertinoThemeData(brightness: Brightness.light),
-      home: MainScreen(),
+      home: const MainScreen(),
       routes: {
-        'MainScreen': (context) => MainScreen(),
+        'MainScreen': (context) => const MainScreen(),
+        'FavoriteScreen': (context) => const FavoriteScreen(),
       },
     );
   }
