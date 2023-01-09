@@ -41,6 +41,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   context: context,
                   builder: (context) => CupertinoAlertDialog(
                     title: const Text('Delete Everything'),
+                    content: const Text(
+                        'Are you sure you want to Delete everything?'),
                     actions: [
                       CupertinoDialogAction(
                         isDefaultAction: true,
