@@ -72,8 +72,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       onTap: () => Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>
-                              DetailNewsScreen(newsIndex: index),
+                          builder: (context) => DetailNewsScreen(
+                              news: controller.newsList[index],
+                              newsIndex: index),
                         ),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
@@ -100,17 +101,17 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           child: controller.newsList[index].bookMark!
                               ? CupertinoButton(
                                   onPressed: () {
-                                    favoriteScreenController
-                                        .deleteLike(controller.newsList[index]);
                                     mainScreenController.changeMarking(index);
+                                    controller
+                                        .deleteLike(controller.newsList[index]);
                                   },
                                   child: const Icon(CupertinoIcons.heart_fill),
                                 )
                               : CupertinoButton(
                                   onPressed: () {
-                                    favoriteScreenController
-                                        .addLike(controller.newsList[index]);
                                     mainScreenController.changeMarking(index);
+                                    controller
+                                        .addLike(controller.newsList[index]);
                                   },
                                   child: const Icon(CupertinoIcons.heart),
                                 ),

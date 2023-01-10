@@ -7,14 +7,14 @@ import 'package:getx_practice/views/favorite_screen_view_model.dart';
 import 'package:getx_practice/views/news_view_model.dart';
 
 class DetailNewsScreen extends StatelessWidget {
-  DetailNewsScreen({Key? key, required this.newsIndex}) : super(key: key);
+  DetailNewsScreen({Key? key, required this.news, required this.newsIndex})
+      : super(key: key);
+  final News news;
   final int newsIndex;
-  final mainScreenController = Get.put(MainScreenViewModel());
   final favoriteScreenController = Get.put(FavoriteScreenViewModel());
 
   @override
   Widget build(BuildContext context) {
-    final News news = mainScreenController.getNews(newsIndex);
     return GetX<MainScreenViewModel>(
       builder: (controller) => CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -26,23 +26,23 @@ class DetailNewsScreen extends StatelessWidget {
                   children: const [Icon(CupertinoIcons.back), Text('news')]),
               onPressed: () => Navigator.pop(context)),
           middle: const Text('Detail'),
-          trailing: controller.getNews(newsIndex).bookMark == false
-              ? CupertinoButton(
-                  child: const Icon(CupertinoIcons.heart),
-                  onPressed: () {
-                    favoriteScreenController
-                        .addLike(controller.newsList[newsIndex]);
-                    controller.changeMarking(newsIndex);
-                  },
-                )
-              : CupertinoButton(
-                  child: const Icon(CupertinoIcons.heart_fill),
-                  onPressed: () {
-                    favoriteScreenController
-                        .deleteLike(controller.newsList[newsIndex]);
-                    controller.changeMarking(newsIndex);
-                  },
-                ),
+          trailing:
+              controller.getNews(news.index ?? newsIndex).bookMark == false
+                  ? CupertinoButton(
+                      child: const Icon(CupertinoIcons.heart),
+                      onPressed: () {
+                        favoriteScreenController.addLike(news);
+                        controller.changeMarking(newsIndex);
+                      },
+                    )
+                  : CupertinoButton(
+                      child: const Icon(CupertinoIcons.heart_fill),
+                      onPressed: () {
+                        favoriteScreenController
+                            .deleteLike(controller.newsList[news.index!]);
+                        controller.changeMarking(news.index!);
+                      },
+                    ),
         ),
         child: Scaffold(
           body: Container(

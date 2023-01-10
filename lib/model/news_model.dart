@@ -23,6 +23,7 @@ class News {
   String? description;
   DateTime? publishedAt;
   bool? bookMark;
+  int? index;
 
   News({
     this.title,
@@ -32,6 +33,7 @@ class News {
     this.description,
     this.publishedAt,
     this.bookMark,
+    this.index,
   }) {
     // url 이미지 깨졌을때 대체 이미지
     if (urlToImage == null ||
