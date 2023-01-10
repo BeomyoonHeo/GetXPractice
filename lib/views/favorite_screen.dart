@@ -104,6 +104,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     mainScreenController.changeMarking(
                                         controller.newsList[index].index!);
                                     //mainScreen의 index를 호출하여 marking 변경
+
                                     controller
                                         .deleteLike(controller.newsList[index]);
                                   },
