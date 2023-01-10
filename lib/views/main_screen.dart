@@ -48,8 +48,9 @@ class _MainScreenState extends State<MainScreen> {
                       onTap: () => Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>
-                              DetailNewsScreen(newsIndex: index),
+                          builder: (context) => DetailNewsScreen(
+                              newsIndex: index,
+                              news: controller.newsList[index]),
                         ),
                       ),
                       title: Text(controller.newsList[index].title!,
@@ -73,17 +74,17 @@ class _MainScreenState extends State<MainScreen> {
                           child: controller.newsList[index].bookMark!
                               ? CupertinoButton(
                                   onPressed: () {
+                                    controller.changeMarking(index);
                                     favoriteScreenController
                                         .deleteLike(controller.newsList[index]);
-                                    controller.changeMarking(index);
                                   },
                                   child: const Icon(CupertinoIcons.heart_fill),
                                 )
                               : CupertinoButton(
                                   onPressed: () {
+                                    controller.changeMarking(index);
                                     favoriteScreenController
                                         .addLike(controller.newsList[index]);
-                                    controller.changeMarking(index);
                                   },
                                   child: const Icon(CupertinoIcons.heart),
                                 ),
